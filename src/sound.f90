@@ -1,19 +1,22 @@
 SUBROUTINE SOUND(WHAT)
+  use allcom,only: debug,usesound
   use,intrinsic:: iso_fortran_env,only:error_unit
   IMPLICIT NONE
 
   INTEGER :: RET
   CHARACTER(*), intent(in) :: WHAT
   character(*),parameter :: playexe='ffplay'
+  character(*),parameter :: cmdopts='-autoexit -loglevel quiet -nodisp'
   character(160) :: FN
   character(160) :: cmd
 
-  FN='"sounds/'//WHAT//'.wav"'//CHAR(0)
-  cmd = playexe//' '//fn
-  print *,cmd
-  call execute_command_line('pwd')
+  if (.not. usesound) return
 
-  call execute_command_line(cmd, exitstat=ret)
+  FN='"sounds/'//WHAT//'.wav"'//CHAR(0)
+  cmd = playexe//' '//cmdopts//' '//fn
+  if (debug) print *,cmd
+
+  call execute_command_line(cmd, wait=.false.,exitstat=ret)
 
   if (ret/=0) write(error_unit,*) 'could not invoke sound player ',cmd
 

@@ -236,11 +236,25 @@
 
       CHARACTER ZAPP*20,KK2C*2
       character(*),parameter :: FILNAM='progress.sav'
+      integer argc
+      character(80) :: argv
 
       LOGICAL AJAR,AT,ATHAND,BLIND,DARK,DEAD,EDIBLE,ENCLSD,FORCED,HERE,HINGED,HOLDNG,INSIDE,LOCKS,OUTSID,OPAQUE,PCT,PLURAL,PRINTD,&
               SMALL,TOTING,TREASURE,LOCKED,VESSEL,WEARNG,WEARABLE
+!-------- command line parse
+      cheat=.false.; debug=.false.; usesound=.true.
 
-
+      argc = command_argument_count()
+        do i = 1,argc
+            call get_command_argument(i,argv)
+            if (argv=='-d') debug=.true.
+            if (argv=='-nosound') usesound=.false.
+            if (argv=='-c') then
+                cheat=.true.
+                open(ucheat,file='cheat.asc',status='old',action='read')
+            endif
+        enddo
+!------------------------------
 !  CLEAR OUT THE VARIOUS TEXT-POINTER ARRAYS.  ALL TEXT IS STORED IN ARRAY LINES; EACH LINE IS PRECEDED BY A WORD POINTING TO THE
 !  NEXT POINTER (I.E. THE WORD FOLLOWING THE END OF THE LINE).  THE POINTER IS NEGATIVE IF THIS IS FIRST LINE OF A MESSAGE.  THE
 !  TEXT-POINTER ARRAYS CONTAIN INDICES OF POINTER-WORDS IN LINES.  STEXT(N) IS SHORT DESCRIPTION OF LOCATION N.  LTEXT(N) IS LONG
