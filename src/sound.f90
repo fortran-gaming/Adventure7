@@ -18,6 +18,9 @@ SUBROUTINE SOUND(WHAT)
 
   call execute_command_line(cmd, wait=.false.,exitstat=ret)
 
-  if (ret/=0) write(error_unit,*) 'could not invoke sound player ',cmd
+  if (ret/=0) then
+    write(error_unit,*) 'could not invoke sound player ',cmd
+    usesound=.false.
+  endif
 
 END subroutine sound

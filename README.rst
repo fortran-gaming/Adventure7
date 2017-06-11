@@ -1,6 +1,6 @@
-==========
-Adventure7
-==========
+===========
+Adventure 7
+===========
 
 Updated to actual Fortran 2008+ syntax.
 
@@ -36,6 +36,13 @@ You can use any compiler you like.::
 
     advgen
     adventure
+
+Command line options
+====================
+
+-c            cheat mode: (future) playback commands from plain-text file
+-d            debug mode: prints debug info
+-nosound      disables playback for systems without `ffplay` installed
 
 Game Versions
 =============
