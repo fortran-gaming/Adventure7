@@ -242,7 +242,6 @@
       LOGICAL AJAR,AT,ATHAND,BLIND,DARK,DEAD,EDIBLE,ENCLSD,FORCED,HERE,HINGED,HOLDNG,INSIDE,LOCKS,OUTSID,OPAQUE,PCT,PLURAL,PRINTD,&
               SMALL,TOTING,TREASURE,LOCKED,VESSEL,WEARNG,WEARABLE
 !-------- command line parse
-      cheat=.false.; debug=.false.; usesound=.true.
 
       argc = command_argument_count()
         do i = 1,argc
@@ -250,8 +249,12 @@
             if (argv=='-d') debug=.true.
             if (argv=='-nosound') usesound=.false.
             if (argv=='-c') then
-                cheat=.true.
-                open(ucheat,file='cheat.asc',status='old',action='read')
+                open(newunit=ucheat,file='cheat.asc',status='old',action='read',iostat=ios)
+                if (ios==0) then
+                  cheat=.true.
+                else
+                  write(error_unit,*) 'cheat file not found'
+                endif
             endif
         enddo
 !------------------------------

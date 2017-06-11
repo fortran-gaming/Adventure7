@@ -1,8 +1,8 @@
 MODULE ALLCOM
  implicit none
 
- logical debug,usesound,cheat
- integer ucheat
+ logical :: debug=.false.,usesound=.true.,cheat=.false.
+ integer :: ucheat
 
  INTEGER, PARAMETER:: MAX_LINES=22000,MAX_TRAVEL=1400,MAX_DWARF=6,MAX_LOC=300,MAX_PREP=300,MAX_OBJECT=150,LOC_SIZE=250,&
                       RTEXT_SIZE=450,TAB_SIZE=600,MAX_VERB=60,MAX_ADJ=50,MAX_TAB=600,&
