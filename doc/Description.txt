@@ -1,0 +1,13 @@
+Adventure 7 maximum 560 points. re-written in standard Fortran 2008 from Adventure 6 with corrections and additions
+of sounds, color, basilisk, mermaid and ruby yacht by Neal Van Eck, 2011.
+
+Adventure 6 was based on Adventure 5 with additions by David Long, and an anonymous coder around 1984.
+Doug McDonald changed it so that it would compile with f77 in 1990.
+
+Adventure 5 was extended from the 350 point original to 501 points by David Long at the University of Chicago around 1978.
+
+The program was compiled as an Intel Fortran Composer Quickwin project using a few Quickwin routines for color and standard APIs for sound.
+
+
+
+
