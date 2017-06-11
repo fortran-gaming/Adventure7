@@ -16,7 +16,8 @@ SUBROUTINE SOUND(WHAT)
   cmd = playexe//' '//cmdopts//' '//fn
   if (debug) print *,cmd
 
-  call execute_command_line(cmd, exitstat=ret)
+  ! exitstat only works for wait=.true. by Fortran 2008 spec.
+  call execute_command_line(cmd, wait=.true.,exitstat=ret)
   if (debug) print *,'sound player return code',ret
 
   if (ret/=0) then
