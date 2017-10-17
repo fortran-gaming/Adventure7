@@ -3,7 +3,7 @@ project(adv7 Fortran)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ..)
 
-add_compile_options(-Wline-truncation -g -fbacktrace -Wall -Wpedantic  -Wno-unused-dummy-argument)# -Wfatal-errors) #-Wextra
+add_compile_options(-Wline-truncation -g -fbacktrace -Wall -Wpedantic  -Wno-unused-dummy-argument -Werror=array-bounds)# -Wfatal-errors) #-Wextra
 
 add_executable(adventure bug.f90 class.f90 rating.f90 treasure.f90 vocabx.f90 advmods.f90 clrlin.f90 val.f90 drop.f90 insert.f90 carry.f90  asubs.f90 athand.f90 toting.f90 move.f90 remove.f90 speak.f90 upper_case.f90 sound.f90 poof.f90 pspeak.f90 not_toting_spk.f90 yes.f90 wait.f90 color.f90 burden.f90 lookin.f90 getlin.f90 replace.f90 ljust.f90 travl.f90 getwds.f90 getobj.f90 adventure.f90)
 

@@ -3,12 +3,12 @@ SUBROUTINE SOUND(WHAT)
   use,intrinsic:: iso_fortran_env,only:error_unit
   IMPLICIT NONE
 
-  INTEGER :: RET
+  INTEGER :: ret, cret
   CHARACTER(*), intent(in) :: WHAT
   character(*),parameter :: playexe='ffplay'
   character(*),parameter :: cmdopts='-autoexit -loglevel quiet -nodisp'
   character(160) :: FN
-  character(160) :: cmd
+  character(160) :: cmd,emsg
 
   if (.not. usesound) return
 
@@ -17,11 +17,13 @@ SUBROUTINE SOUND(WHAT)
   if (debug) print *,cmd
 
   ! exitstat only works for wait=.true. by Fortran 2008 spec.
-  call execute_command_line(cmd, wait=.true.,exitstat=ret)
-  if (debug) print *,'sound player return code',ret
+  ! cmdstat/cmdmsg necessary to avoid whole program halt on execute_command_line error
+  call execute_command_line(cmd, wait=.true.,exitstat=ret,cmdstat=cret,cmdmsg=emsg)
 
-  if (ret/=0) then
-    write(error_unit,*) 'could not invoke sound player ',cmd
+  if (debug) print *,'sound player return code',ret,cret
+
+  if (ret/=0.or.cret/=0) then
+    write(error_unit,*) 'could not invoke sound player ',cmd,emsg
     usesound=.false.
   endif
 
