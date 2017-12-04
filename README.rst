@@ -1,3 +1,7 @@
+.. image:: https://travis-ci.org/scivision/Adventure7.svg?branch=master
+    :target: https://travis-ci.org/scivision/Adventure7
+
+
 ===========
 Adventure 7
 ===========
