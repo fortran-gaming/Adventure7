@@ -19,10 +19,10 @@ before_build:
 - cd bin
 
 build_script:
-- cmd: cmake -G "MinGW Makefiles" ..
+- cmd: cmake -G "MinGW Makefiles" ../src
 - cmd: mingw32-make
 
-- sh: cmake ..
+- sh: cmake ../src
 - sh: make
   
 
