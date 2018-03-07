@@ -1,7 +1,10 @@
 .. image:: https://travis-ci.org/scivision/Adventure7.svg?branch=master
     :target: https://travis-ci.org/scivision/Adventure7
-
-
+    
+.. image:: https://ci.appveyor.com/api/projects/status/3gpcw8haer49tyts?svg=true
+    :target: https://ci.appveyor.com/project/scivision/adventure7
+    
+    
 ===========
 Adventure 7
 ===========
