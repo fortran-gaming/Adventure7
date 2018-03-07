@@ -26,5 +26,7 @@ build_script:
 - sh: make
   
 after_build:
-- cmd: ..\advgen
-- sh: ../advgen
+- cd ..
+
+- cmd: advgen
+- sh: ./advgen

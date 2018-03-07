@@ -7,11 +7,7 @@ os:
   
 env: FC=gfortran
 
-dist: trusty
-group: edge
-
-notifications:
-  email: false
+group: travis_latest
 
 git:
   depth: 3
@@ -34,5 +30,6 @@ install:
     - make
     
 script:
-  - ../advgen
+  - cd ..
+  - ./advgen
 
