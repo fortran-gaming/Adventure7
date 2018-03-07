@@ -31,7 +31,8 @@ before_install:
 install: 
     - cd bin
     - cmake ../src
+    - make
     
 script:
-    - make
+  - ../advgen
 
