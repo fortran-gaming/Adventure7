@@ -5,14 +5,24 @@ SUBROUTINE SOUND(WHAT)
 
   INTEGER :: ret, cret
   CHARACTER(*), intent(in) :: WHAT
-  character(*),parameter :: playexe='ffplay'
-  character(*),parameter :: cmdopts='-autoexit -loglevel quiet -nodisp'
-  character(160) :: FN
-  character(160) :: cmd,emsg
+  character(*),parameter :: playexe='ffplay', &
+                            cmdopts='-autoexit -loglevel quiet -nodisp', &
+                            sounddir='sounds/'
+
+  character(:),allocatable :: fn,cmd
+  character(80) :: emsg
+  logical fexist
 
   if (.not. usesound) return
 
-  FN='"sounds/'//WHAT//'.wav"'//CHAR(0)
+  inquire(file=sounddir,exist=fexist)
+  if (.not.fexist) then
+    write(error_unit,*) sounddir,' does not exist!'
+    usesound=.false.
+  endif
+
+  FN = '"'//sounddir//trim(WHAT)//'.wav'//'"' ! double-quotes necessary for filename with spaces.
+
   cmd = playexe//' '//cmdopts//' '//fn
   if (debug) print *,cmd
 
@@ -22,8 +32,9 @@ SUBROUTINE SOUND(WHAT)
 
   if (debug) print *,'sound player return code',ret,cret
 
-  if (ret/=0.or.cret/=0) then
-    write(error_unit,*) 'could not invoke sound player ',cmd,emsg
+  if (ret /= 0 .or. cret /= 0) then
+    write(error_unit,*) 'could not invoke sound player ',cmd
+    write(error_unit,*) emsg
     usesound=.false.
   endif
 

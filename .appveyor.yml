@@ -25,4 +25,6 @@ build_script:
 - sh: cmake ../src
 - sh: make
   
-
+after_build:
+- cmd: ..\advgen
+- sh: ../advgen

@@ -2022,7 +2022,6 @@
                    WKDAY,WKEND,WASDARK,YEA,ACTSPK,CTEXT,CVAL,HNAME
          CLOSE(U,STATUS='KEEP')
          IF (I/=0)  THEN
-            CALL GERROR(FILNAM)
             WRITE(*,"('SAVE failed: ',A/)") FILNAM
          ENDIF
       GO TO 2100

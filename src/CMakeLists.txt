@@ -9,3 +9,5 @@ add_executable(adventure bug.f90 class.f90 rating.f90 treasure.f90 vocabx.f90 ad
 
 add_executable(advgen bug.f90 class.f90 rating.f90 treasure.f90 vocabx.f90 advmods.f90 advgendat.f90 clrlin.f90 val.f90 drop.f90 insert.f90 carry.f90)
 
+add_executable(testsound advmods.f90 sound.f90 TestSound.f90)
+
