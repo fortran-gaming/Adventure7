@@ -65,7 +65,8 @@ target_link_libraries(advgen PRIVATE bug advmods ${FFLAGS})
 add_executable(testsound TestSound.f90)
 target_link_libraries(testsound PRIVATE sound advmods)
 
-add_test(NAME Generate COMMAND advgen WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+add_test(NAME Generate COMMAND advgen
+          WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
 if (NOT WIN32)
   add_test(NAME ShortGame COMMAND sh -c "./adventure -nosound < testinput.txt"
