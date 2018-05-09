@@ -3,7 +3,7 @@ fast_finish: true
 
 os:
   - linux
-  - osx
+#  - osx  Travis-CI segfault for all repos !?
   
 env: FC=gfortran
 
