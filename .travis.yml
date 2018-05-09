@@ -32,3 +32,5 @@ install:
 script:
   - make test
 
+after_failure:
+  - ctest -V

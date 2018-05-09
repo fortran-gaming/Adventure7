@@ -11,7 +11,7 @@ SUBROUTINE SOUND(WHAT)
 
   character(:),allocatable :: fn,cmd
   character(80) :: emsg
-  logical fexist
+
 
   if (.not. usesound) return
 
