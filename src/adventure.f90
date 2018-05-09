@@ -2782,7 +2782,7 @@
 
 !     IT'S OVER.  TALLY SCORE.
 
-95000 CALL RATING(SCORE,BONUS,GAVEUP,SCORNG,CLOSNG,CLOSED,HNTMAX)
+95000 CALL RATING(SCORE,BONUS,GAVEUP,SCORNG,CLOSNG,CLOSED)
 
       WRITE(output_unit,"(A,I0,A,I0,A,I0,A)")  'You scored ',score,' out of a possible ',mxscor,', using ',turns,' turns.'
 

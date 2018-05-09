@@ -15,12 +15,6 @@ SUBROUTINE SOUND(WHAT)
 
   if (.not. usesound) return
 
-  inquire(file=sounddir,exist=fexist)
-  if (.not.fexist) then
-    write(error_unit,*) sounddir,' does not exist!'
-    usesound=.false.
-  endif
-
   FN = '"'//sounddir//trim(WHAT)//'.wav'//'"' ! double-quotes necessary for filename with spaces.
 
   cmd = playexe//' '//cmdopts//' '//fn
