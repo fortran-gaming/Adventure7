@@ -30,6 +30,5 @@ install:
     - make
     
 script:
-  - cd ..
-  - ./advgen
+  - make test
 

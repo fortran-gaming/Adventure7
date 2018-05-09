@@ -1,5 +1,6 @@
 cmake_minimum_required (VERSION 3.7)
 project(adv7 Fortran)
+enable_testing()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ..)
 
@@ -15,9 +16,9 @@ if(${CMAKE_Fortran_COMPILER_ID} STREQUAL GNU)
   -finit-real=nan -Wconversion -fimplicit-none
   -Wline-truncation  -Wno-unused-dummy-argument) #-Warray-temporaries
   
-  link_libraries(-fsanitize=address)
+#  link_libraries(-fsanitize=address) Only for Linux, don't bother on CI for now.
   
-  if (NOT CYGWIN AND NOT WIN32)
+  if(NOT CYGWIN AND NOT WIN32)
     add_compile_options(-fstack-protector-all)
   endif()
   
@@ -63,4 +64,14 @@ target_link_libraries(advgen PRIVATE bug advmods ${FFLAGS})
 
 add_executable(testsound TestSound.f90)
 target_link_libraries(testsound PRIVATE sound advmods)
+
+add_test(NAME Generate COMMAND advgen WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+if (NOT WIN32)
+  add_test(NAME ShortGame COMMAND sh -c "./adventure -nosound < testinput.txt"
+          WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+  set_tests_properties(ShortGame  PROPERTIES FIXTURES_SETUP Generate)
+else()
+ # TODO
+endif()
 
