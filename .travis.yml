@@ -13,15 +13,12 @@ os:
 
 env: FC=gfortran-6
 
-addons:
-  apt:
-    packages:
-      - gfortran
 
 before_install:
   - if [[ $TRAVIS_OS_NAME == osx ]]; then
       brew update;
       brew install gcc || brew link --overwrite gcc > /dev/null;
+      export FC=gfortran;
     else
       sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y;
       sudo apt-get update -q;
