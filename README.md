@@ -3,7 +3,7 @@
 
 # Adventure 7
 
-Updated to actual Fortran 2008+ syntax.
+Updated to actual Fortran 2008+ syntax, such as Gfortran 6 or Intel Fortran.
 
 from <http://www.ifarchive.org/indexes/if-archiveXgamesXpc.html>
 

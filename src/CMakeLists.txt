@@ -66,8 +66,9 @@ add_executable(testsound TestSound.f90)
 target_link_libraries(testsound PRIVATE sound advmods)
 
 if (UNIX)
-  add_test(NAME ShortGame COMMAND sh -c "./adventure -nosound < testinput.txt"
+  add_test(NAME ShortGame COMMAND sh -c "./adventure -nosound < ../testinput.txt"
           WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-  set_tests_properties(ShortGame  PROPERTIES FIXTURES_SETUP Generate)
+  set_tests_properties(ShortGame PROPERTIES FIXTURES_SETUP Generate)
+  set_tests_properties(Generate ShortGame PROPERTIES TIMEOUT 30)
 endif()
 
