@@ -2,8 +2,6 @@ cmake_minimum_required (VERSION 3.7)
 project(adv7 Fortran)
 enable_testing()
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ..)
-
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
   add_compile_options(-g -O0)
 else()
@@ -18,14 +16,12 @@ if(${CMAKE_Fortran_COMPILER_ID} STREQUAL GNU)
   
 #  link_libraries(-fsanitize=address) Only for Linux, don't bother on CI for now.
   
-  if(NOT CYGWIN AND NOT WIN32)
+  if(UNIX AND NOT APPLE)
     add_compile_options(-fstack-protector-all)
   endif()
   
-  if(${CMAKE_Fortran_COMPILER_VERSION} VERSION_GREATER_EQUAL 8.1)
+  if(${CMAKE_Fortran_COMPILER_VERSION} VERSION_GREATER_EQUAL 8)
     add_compile_options(-std=f2018)
-  else()
-     add_compile_options(-std=f2008ts)
   endif()
 elseif(${CMAKE_Fortran_COMPILER_ID} STREQUAL Intel)
   add_compile_options(-warn -fpe0 -traceback -debug extended -check all)
@@ -56,23 +52,22 @@ else()
 endif()
 target_link_libraries(sound PRIVATE advmods)
 
-add_executable(adventure class.f90 rating.f90 treasure.f90 vocabx.f90  clrlin.f90 val.f90 drop.f90 insert.f90 carry.f90  asubs.f90 athand.f90 toting.f90 move.f90 remove.f90 speak.f90 upper_case.f90 poof.f90 pspeak.f90 not_toting_spk.f90 yes.f90 color.f90 burden.f90 lookin.f90 getlin.f90 replace.f90 ljust.f90 travl.f90 getwds.f90 getobj.f90 adventure.f90)
+add_executable(adventure class.f90 rating.f90 treasure.f90 vocabx.f90  clrlin.f90 val.f90 drop.f90 insert.f90 carry.f90 asubs.f90 athand.f90 toting.f90 move.f90 remove.f90 speak.f90 upper_case.f90 poof.f90 pspeak.f90 not_toting_spk.f90 yes.f90 color.f90 burden.f90 lookin.f90 getlin.f90 replace.f90 ljust.f90 travl.f90 getwds.f90 getobj.f90 adventure.f90)
 target_link_libraries(adventure PRIVATE wait sound bug advmods ${FFLAGS})
 
 add_executable(advgen class.f90 rating.f90 treasure.f90 vocabx.f90 advgendat.f90 clrlin.f90 val.f90 drop.f90 insert.f90 carry.f90)
 target_link_libraries(advgen PRIVATE bug advmods ${FFLAGS})
+add_test(NAME Generate COMMAND advgen
+          WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../adv.txt 
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 add_executable(testsound TestSound.f90)
 target_link_libraries(testsound PRIVATE sound advmods)
 
-add_test(NAME Generate COMMAND advgen
-          WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-
-if (NOT WIN32)
+if (UNIX)
   add_test(NAME ShortGame COMMAND sh -c "./adventure -nosound < testinput.txt"
           WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
   set_tests_properties(ShortGame  PROPERTIES FIXTURES_SETUP Generate)
-else()
- # TODO
 endif()
 

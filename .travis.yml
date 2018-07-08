@@ -1,36 +1,33 @@
-language: c
-fast_finish: true
-
-os:
-  - linux
-#  - osx  Travis-CI segfault for all repos !?
-  
-env: FC=gfortran
-
+language: generic
+sudo: required
+dist: xenial
 group: travis_latest
 
 git:
   depth: 3
+  quiet: true
+
+os:
+  - linux
+  - osx
+
+env: FC=gfortran
 
 addons:
   apt:
-    packages: 
+    packages:
       - gfortran
 
 before_install:
   - if [[ $TRAVIS_OS_NAME == osx ]]; then
       brew update;
-      brew install gcc || true;
-      brew link --overwrite gcc;
+      brew install gcc || brew link --overwrite gcc > /dev/null;
     fi
 
-install: 
-    - cd bin
-    - cmake ../src
-    - make
-    
-script:
-  - make test
+install:
+  - cd bin
+  - cmake ../src
+  - cmake --build .
 
-after_failure:
+script:
   - ctest -V
