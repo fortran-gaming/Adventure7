@@ -1,28 +1,22 @@
 image:
 - Visual Studio 2017
-# - Ubuntu  # cmake 3.5 !?
+- Ubuntu
 
 environment:
   MINGW_DIR: C:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin
 
 clone_depth: 3
 
-before_build:
+build: off
+
+init:
 - cmd: set PATH=%MINGW_DIR%;%PATH%
-# fix CMake sh.exe issue, by removing Git path.
-- cmd: set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
-- cmd: set FC=%MINGW_DIR%\gfortran 
-- cmd: mklink bin\make.exe %MINGW_DIR%\mingw32-make.exe
 
-- sh: sudo apt-get -yq update > /dev/null
-- sh: sudo apt-get install -yq --no-install-suggests --no-install-recommends gfortran cmake make > /dev/null
-
-build_script:
+install:
 - cd bin
-- cmd: cmake -G "MinGW Makefiles" ../src
+- cmd: cmake -G "MinGW Makefiles" -DCMAKE_SH="CMAKE_SH-NOTFOUND" ../src
 - sh: cmake ../src
 - cmake --build .
-  
-after_build:
-- ctest -V
+
+test_script: ctest -V
 

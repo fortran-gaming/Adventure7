@@ -30,5 +30,5 @@ install:
   - cmake ../src
   - cmake --build .
 
-script:
-  - ctest -V
+script: ctest -V
+

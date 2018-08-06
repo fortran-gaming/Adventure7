@@ -1,5 +1,5 @@
-[![image](https://travis-ci.org/scivision/Adventure7.svg?branch=master)](https://travis-ci.org/scivision/Adventure7)
-[![image](https://ci.appveyor.com/api/projects/status/3gpcw8haer49tyts?svg=true)](https://ci.appveyor.com/project/scivision/adventure7)
+[![image](https://travis-ci.org/fortran-gaming/Adventure7.svg?branch=master)](https://travis-ci.org/fortran-gaming/Adventure7)
+[![Build status](https://ci.appveyor.com/api/projects/status/1hih2kk792rpheym?svg=true)](https://ci.appveyor.com/project/scivision/adventure7)
 
 # Adventure 7
 
@@ -59,9 +59,8 @@ APIs for sound.
 
 ### Adventure 6
 
-based on Adventure 5 with additions by David Long, and an anonymous
-coder around 1984. Doug McDonald changed it so that it would compile
-with f77 in 1990.
+based on Adventure 5 with additions by David Long, and an anonymous coder around 1984. 
+Doug McDonald changed it so that it would compile with f77 in 1990.
 
 ### Adventure 5
 
