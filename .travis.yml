@@ -1,34 +1,35 @@
 language: generic
-sudo: required
-dist: xenial
 group: travis_latest
+dist: xenial
 
 git:
   depth: 3
   quiet: true
 
-os:
-  - linux
-  - osx
+env: FC=gfortran
 
-env: FC=gfortran-6
+addons:
+  apt:
+    sources: ubuntu-toolchain-r-test
+    packages: gfortran-6
 
-
-before_install:
-  - if [[ $TRAVIS_OS_NAME == osx ]]; then
-      brew update;
-      brew install gcc || brew link --overwrite gcc > /dev/null;
-      export FC=gfortran;
-    else
-      sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y;
-      sudo apt-get update -q;
-      sudo apt-get install -yq gfortran-6;
-    fi
+matrix:
+  include:
+  - os: linux
+    env: FC=gfortran-6
+  - os: osx 
+    before_install: brew install gcc
+  - os: windows
+    language: sh
+    install: 
+    - cd bin
+    - cmake -G "MinGW Makefiles" -DCMAKE_SH="CMAKE_SH-NOTFOUND" ../src
+    - cmake --build .
 
 install:
   - cd bin
   - cmake ../src
   - cmake --build .
 
-script: ctest -V
+script: ctest --output-on-failure
 
