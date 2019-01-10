@@ -1,4 +1,4 @@
-language: generic
+language: c
 group: travis_latest
 dist: xenial
 
@@ -20,7 +20,6 @@ matrix:
   - os: osx 
     before_install: brew install gcc
   - os: windows
-    language: sh
     install: 
     - cd bin
     - cmake -G "MinGW Makefiles" -DCMAKE_SH="CMAKE_SH-NOTFOUND" ../src

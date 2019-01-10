@@ -7,7 +7,7 @@ SUBROUTINE SOUND(WHAT)
   CHARACTER(*), intent(in) :: WHAT
   character(*),parameter :: playexe='ffplay', &
                             cmdopts='-autoexit -loglevel quiet -nodisp', &
-                            sounddir='sounds/'
+                            sounddir='../sounds/'
 
   character(:),allocatable :: fn,cmd
   character(80) :: emsg

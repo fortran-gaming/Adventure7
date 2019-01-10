@@ -7,33 +7,56 @@ Updated to actual Fortran 2008+ syntax, such as Gfortran 6 or Intel Fortran.
 
 from <http://www.ifarchive.org/indexes/if-archiveXgamesXpc.html>
 
-## Compile/setup
+## Compile
 
 This game is cross-platform thanks to Fortran.
+It will build with CMake or Meson.
 
-Linux / Mac / Windows Subsystem for Linux / Cygwin:
+### CMake
+
+If you choose to build with CMake:
+
 ```sh
 cd bin
+
 cmake ../src
 cmake --build .
-
-./advgen
-./adventure
 ```
 
-### Windows
-
-This assumes you're using the MinGW compiler. 
-You can use any compiler
-you like:
+if on Windows, assuming MinGW compiler.
 ```sh
 cd bin
 cmake -G "MinGW Makefiles" ../src
 cmake --build .
-
-advgen
-adventure
 ```
+
+### Meson
+
+If you choose to build with Meson:
+
+```sh
+cd bin
+
+meson ..
+
+ninja
+```
+
+
+## Play
+
+This command is needed once to setup the game data file.
+from the Adventure7/bin/ directory:
+
+```sh
+./advgen  # one time
+```
+
+Play from the Adventure7/bin/ directory
+```sh 
+./adventure
+```
+
 
 ## Command line options
 
@@ -45,9 +68,8 @@ adventure
 
 ### Adventure 7 - GNU edition
 
-Updated to true Fortran 2008 (where beneficial), removing proprietary
-Intel compiler, Quickwin and Windows-only library dependencies. Attempt
-at cross-platform sound using shell call, will soft-fail.
+Updated by Michael Hirsch, Ph.D. to true Fortran 2008 (where beneficial), removing proprietary Intel compiler, Quickwin and Windows-only library dependencies. 
+Attempt at cross-platform sound using shell call, will silently soft-fail.
 
 ### Adventure 7
 
@@ -69,7 +91,7 @@ University of Chicago around 1978.
 
 ## Test sound
 
-Sound playback is via ffplay. Test by:
+Sound playback is via `ffplay`. Test by:
 ```sh
 ./testsound < testsound.txt
 ```
