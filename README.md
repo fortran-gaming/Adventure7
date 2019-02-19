@@ -17,7 +17,7 @@ It will build with CMake or Meson.
 If you choose to build with CMake:
 
 ```sh
-cd bin
+cd build
 
 cmake ../src
 cmake --build .
@@ -25,7 +25,7 @@ cmake --build .
 
 if on Windows, assuming MinGW compiler.
 ```sh
-cd bin
+cd build
 cmake -G "MinGW Makefiles" ../src
 cmake --build .
 ```
@@ -35,7 +35,7 @@ cmake --build .
 If you choose to build with Meson:
 
 ```sh
-cd bin
+cd build
 
 meson ..
 
@@ -46,29 +46,29 @@ ninja
 ## Play
 
 This command is needed once to setup the game data file.
-from the Adventure7/bin/ directory:
+from the Adventure7/build/ directory:
 
 ```sh
 ./advgen  # one time
 ```
 
-Play from the Adventure7/bin/ directory
-```sh 
+Play from the Adventure7/build/ directory
+```sh
 ./adventure
 ```
 
 
 ## Command line options
 
-* `-c` cheat mode: (future) playback commands from plain-text file 
-* `-d` debug mode: prints debug info 
+* `-c` cheat mode: (future) playback commands from plain-text file
+* `-d` debug mode: prints debug info
 * `-nosound` disables playback for systems without ffplay installed
 
 ## Game Versions
 
 ### Adventure 7 - GNU edition
 
-Updated by Michael Hirsch, Ph.D. to true Fortran 2008 (where beneficial), removing proprietary Intel compiler, Quickwin and Windows-only library dependencies. 
+Updated by Michael Hirsch, Ph.D. to true Fortran 2008 (where beneficial), removing proprietary Intel compiler, Quickwin and Windows-only library dependencies.
 Attempt at cross-platform sound using shell call, will silently soft-fail.
 
 ### Adventure 7
@@ -81,7 +81,7 @@ APIs for sound.
 
 ### Adventure 6
 
-based on Adventure 5 with additions by David Long, and an anonymous coder around 1984. 
+based on Adventure 5 with additions by David Long, and an anonymous coder around 1984.
 Doug McDonald changed it so that it would compile with f77 in 1990.
 
 ### Adventure 5
