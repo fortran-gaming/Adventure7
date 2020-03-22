@@ -33,4 +33,3 @@ install:
   - cmake --build .
 
 script: ctest --output-on-failure
-

@@ -4,6 +4,7 @@ testsound
 adventure
 advgen
 
+build*/
 bin/
 # Prerequisites
 *.d
