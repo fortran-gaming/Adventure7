@@ -1,6 +1,4 @@
 name: ci_cmake
-env:
-  CI: true
 
 on:
   push:
@@ -10,8 +8,7 @@ on:
       - "**/*.cmake"
       - "**/*.txt"
       - ".github/workflows/ci_cmake.yml"
-  pull_request:
-  release:
+
 
 jobs:
 
@@ -19,22 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
+    - uses: actions/setup-python@v2
       with:
         python-version: '3.x'
-    - name: Install packages
-      run: |
-        pip install cmake
-        sudo apt update -yq
-        sudo apt install -yq --no-install-recommends gfortran
 
     - run: cmake -B build
-      env:
-        FC: gfortran
-
     - run: cmake --build build --parallel
 
-    - run: ctest -V --parallel
+    - run: ctest --output-on-failure --parallel 2
       working-directory: build
 
   windows:
@@ -42,13 +31,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - run: cinst -y ninja
-
-    - run: cmake -B build -G Ninja
-      env:
-        FC: gfortran
-
+    - run: cmake -B build -G "MinGW Makefiles"
     - run: cmake --build build --parallel
 
-    - run: ctest -V --parallel
+    - run: ctest --output-on-failure
       working-directory: build
