@@ -9,7 +9,7 @@ character(32) :: argv
 
 debug=.false.
 
-print *,'Type (case senstive) sound name and press Enter.   Ctrl-C to exit'
+print *,'Type (case sensitive) sound name and press Enter.   Ctrl-C to exit'
 
 do while (ios==0)
   read(input_unit,'(A)', iostat=ios) argv  ! '(A)' needed to pass whole string if spaces inside

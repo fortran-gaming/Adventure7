@@ -22,11 +22,10 @@ add_executable(testsound TestSound.f90)
 target_link_libraries(testsound PRIVATE sound advmods)
 
 add_test(NAME ShortGame
-COMMAND sh -c "$<TARGET_FILE:adventure> -nosound < ../testinput.txt"
+COMMAND ${CMAKE_COMMAND} -Dexe:FILEPATH=$<TARGET_FILE:adventure> -Dargs=-nosound -Din:FILEPATH=${PROJECT_SOURCE_DIR}/tests/testinput.txt -P ${PROJECT_SOURCE_DIR}/cmake/run.cmake
 WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
 )
 set_tests_properties(ShortGame PROPERTIES
 TIMEOUT 30
-DISABLED $<NOT:$<BOOL:${UNIX}>>
 REQUIRED_FILES ${PROJECT_BINARY_DIR}/adv.dat
 )
