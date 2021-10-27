@@ -1,6 +1,9 @@
-cmake_minimum_required(VERSION 3.14...3.22)
+cmake_minimum_required(VERSION 3.19...3.22)
+
 project(adv7
-LANGUAGES Fortran)
+LANGUAGES Fortran
+)
+
 enable_testing()
 
 include(cmake/compilers.cmake)
